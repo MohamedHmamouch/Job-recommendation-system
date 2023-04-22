@@ -20,7 +20,7 @@ class JobPrediction:
 
     def __init__(self,mlflow_uri,run_id,clusters_yaml_path):
 
-        self.mlflow_uri=mlflow_uri
+        self.tracking_uri=mlflow_uri
         self.run_id=run_id
         
         mlflow_objs=self.load_mlflow_objs()
@@ -103,23 +103,24 @@ class JobPrediction:
             return cluster_features
         
 
-        def create_skills_features(self,available_skills,exclude_features):
+        def create_skills_features(self,available_skills):
 
-            all_features=pd.Series(self.features_names.copy())
+            sample_clusters=self.skills_clusters_df.copy()
+            sample_clusters['available_skills']=sample_clusters['skill'].isin(available_skills)
 
-            skills_names=all_features[~all_features.isin(exclude_features)]
+            skill_feature=sample_clusters.groupby('skill')['available_skills'].sum()
 
-            ohe_skills=pd.Series(skills_names.isin(available_skills).astype(int).tolist(),index=skills_names)
+            
 
-            return ohe_skills
+            return skill_feature
         
 
         clusters_features=create_cluster_features(self,available_skills)
 
-        skills_features=create_skills_features(self,available_skills,exclude_features=clusters_features.index)
+        skills_features=create_skills_features(self,available_skills)
 
 
-        features=pd.concat([skills_features,clusters_features])
+        features=pd.concat([skills_features,clusters_features],axis=0)
 
         features=features[self.features_names]
 
@@ -159,6 +160,14 @@ class JobPrediction:
             add_skill_uplift=(add_skill_prob-base_predictions)/base_predictions
 
             add_skill_uplift.name=skill
+            simulated_results.append(add_skill_uplift)
+
+        simulated_results=pd.DataFrame(simulated_results)
+
+
+        target_resutls=simulated_results[target_job].sort_values(ascending=False)
+
+        return target_resutls[(target_resutls>threshold)]
             
 
 
