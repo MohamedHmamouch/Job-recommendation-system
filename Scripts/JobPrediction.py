@@ -18,24 +18,28 @@ from mlflow.tracking import MlflowClient
 
 class JobPrediction:
 
-    def __init__(self,mlflow_uri,run_id,clusters_yaml_path):
+    # Constructor
+    def __init__(self, mlflow_uri, run_id, clusters_yaml_path):
 
-        self.tracking_uri=mlflow_uri
-        self.run_id=run_id
+        # Constants
+        print(mlflow_uri)
+        self.mlflow_uri  = mlflow_uri
+        self.run_id        = run_id
+
+        # Retrieve model and features
+        mlflow_objs = self.load_mlflow_objs()
+        self.model           = mlflow_objs[0]
+        self.features_names  = mlflow_objs[1]
+        self.targets_names   = mlflow_objs[2]
         
-        mlflow_objs=self.load_mlflow_objs()
-
-        self.model=mlflow_objs[0]
-        self.features_names=mlflow_objs[1]
-        self.targets_names=mlflow_objs[2]
-
-        self.path_clusters_fig=clusters_yaml_path
-        self.skills_clusters_df=self.load_clusters_config(clusters_yaml_path)
+        # Load clusters config 
+        self.path_clusters_config = clusters_yaml_path
+        self.skills_clusters_df = self.load_clusters_config(clusters_yaml_path)
 
     
     def load_mlflow_objs(self):
 
-        mlflow.set_tracking_uri(self.tracking_uri)
+        mlflow.set_tracking_uri(self.mlflow_uri)
 
         client=MlflowClient()
 
