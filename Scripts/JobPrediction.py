@@ -22,9 +22,9 @@ class JobPrediction:
     def __init__(self, mlflow_uri, run_id, clusters_yaml_path):
 
         # Constants
-        print(mlflow_uri)
+        # print(mlflow_uri)
         self.mlflow_uri  = mlflow_uri
-        self.run_id        = run_id
+        self.run_id      = run_id
 
         # Retrieve model and features
         mlflow_objs = self.load_mlflow_objs()
@@ -34,7 +34,8 @@ class JobPrediction:
         
         # Load clusters config 
         self.path_clusters_config = clusters_yaml_path
-        self.skills_clusters_df = self.load_clusters_config(clusters_yaml_path)
+        self.skills_clusters_df   = self.load_clusters_config(clusters_yaml_path)
+
 
     
     def load_mlflow_objs(self):
@@ -77,7 +78,7 @@ class JobPrediction:
                      for cluster_name, cluster_skills in clusters_config.items()
                      for cluster_skill in cluster_skills]
         
-        clusters_df=pd.DataFrame(clusters_df,columns=['cluste_name','skill'])
+        clusters_df=pd.DataFrame(clusters_df,columns=['cluster_name','skill'])
 
 
         return clusters_df
