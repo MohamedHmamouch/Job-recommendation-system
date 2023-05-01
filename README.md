@@ -1,6 +1,115 @@
-# Talent_tracking
+# Talent Tracking : Project Overview
  
 The idea for this project stemmed from reading and watching various podcasts that provided insights on the necessary skills for individuals looking to transition into the field of Data Science.
 
 Utilizing the Stack Overflow survey, I aim to develop a data-driven solution that can answer questions such as:
 "Do I need to learn C++ to become a Data Scientist?"
+
+# Dataset :
+
+- The dataset contains responses from the Stack Overflow Annual Developer Survey.
+- The purpose of the dataset is to provide insights into the skills, experience, and demographics of developers worldwide.
+- The dataset includes information on employment status, education level, programming experience, and compensation.
+- It covers respondents from various countries, including the USA, India, Germany, Sweden, and Canada.
+- The dataset contains over 80,000 responses from developers across the globe.
+
+- Relevent columns : 
+  - DevType
+  - LanguageHaveWorkedWith
+  - LanguageWantToWorkWith
+  - DatabaseHaveWorkedWith
+  - PlatformHaveWorkedWith
+  - WebframeHaveWorkedWith
+  - MiscTechHaveWorkedWith
+  - ToolsTechHaveWorkedWith
+
+# I- EDA
+## Questions to Explore the Data
+- General:
+  - Total number of responses
+  - Geographic distribution of respondents
+  - Rate of missing answers
+- Skills:
+  - Frequency of each skill in the dataset
+  - Correlation between different skills
+- Jobs:
+  - Frequency of each job title in the dataset
+  - Correlation between different job titles
+- Relationship:
+  - Correlation between skills and job titles
+  - Specificity of each skill to a job title
+
+## Figures
+
+- Highly demanded jobs based on dataset : 
+ 
+ ![alt text](./figures/highly_demand_jobs.png "Highly demanded jobs")
+ 
+ - Looking for most demanding skills in each groups 
+   ![alt text](./figures/tree_map.png "common skills by groups")
+   
+  - Relation between skills and jobs 
+      <img src="./figures/heatmap_job_skills.png" alt="common skills by groups" width="1500" height="500">
+      
+      
+  - Relation between Jobs : 
+    - Something weird, backend and front-end should be close or in a cluster, we see here that backend dev are close to quality assurance. The solution is to normalize the data and it gives the second figures
+   
+      ![alt text](./figures/dendogram.png "dendogram")
+      
+      
+      ![alt text](./figures/dendogram_normalize.png "dendogram")
+      
+      
+      
+ - Common skills for each job : 
+ 
+    ![alt text](./figures/most_common_skill_each_job.png "dendogram")
+
+
+# II- Feature Engineering
+
+- In this section, I have attempted to cluster the tools used by each profile. The aim is to create a reference for each job, which will assist in determining which profile to place based on their skills, as well as to provide recommendations. I used T-sne to visualize different groups, and K-means to create clusters.
+
+
+- Dimentionality reduction using T-sne
+
+![alt text](./figures/t-sne_dim.png "dim reduction")
+      
+      
+      
+      
+- Possible clusters after k-means
+         
+![alt text](./figures/evolution_silhouette_score.png "evolution_silhouette")
+         
+         
+         
+- Clusters of tools  
+
+![alt text](./figures/clusters.png "clusters")
+
+                     
+                      
+                    
+      
+                  
+      
+      
+      
+      
+      
+
+
+      
+      
+
+
+
+  
+  
+
+  
+
+
+
