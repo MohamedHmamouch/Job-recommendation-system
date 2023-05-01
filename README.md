@@ -89,10 +89,28 @@ Utilizing the Stack Overflow survey, I aim to develop a data-driven solution tha
 
 ![alt text](./figures/clusters.png "clusters")
 
-                     
+
+# Modeling 
+
+- I encountered a major issue while modeling and recommending skills due to the large size of my dataset compared to my resources. In order to address this issue, I have decided to implement a simple algorithm without hyperparameter tuning. Although the code is available in notebooks, the algorithm needs to be deployed into production through a Flask or Dash app. My objective is to track the model's progress using Mlflow.
                       
                     
-      
+# Handling class imbalanced
+
+- One way to address this issue is by using class weights. Class weights assign higher weights to the minority class and lower weights to the majority class during the training process, thereby giving more importance to the minority class. In the given code, the class weights are calculated by taking the inverse of the sum of the samples in each class.
+
+- Figures of imbalanced : 
+
+![alt text](./figures/imbalanced.png "clusters")
+
+
+
+- Handling imbalanced using class weight
+
+![alt text](./figures/class_weight.png "clusters")
+
+
+
                   
       
       
