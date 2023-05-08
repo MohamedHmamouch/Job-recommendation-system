@@ -146,7 +146,7 @@ class JobPrediction:
         return predictions
     
 
-    def recommend_new_skills(self,available_skills,target_job,threshold=0):
+    def recommend_new_skills(self,available_skills,target_job,threshold=0.3):
 
 
         base_predictions=self.predict_jobs_probabilities(available_skills)

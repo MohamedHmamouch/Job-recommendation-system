@@ -18,35 +18,19 @@ skills=pd.read_pickle('../Notebook/skills.pkl')
 norm_skills=pd.read_pickle('../Notebook/normalized_skills.pkl')
 df=pd.read_pickle('../Notebook/binary_data.pkl')
 
-roles=['Marketing or sales professional',
- 'Scientist',
- 'Senior Executive (C-Suite, VP, etc.)',
- 'Developer, game or graphics',
- 'Educator',
- 'Engineer, site reliability',
- 'Academic researcher',
- 'Product manager',
- 'Other (please specify):',
- 'Developer, QA or test',
- 'Data or business analyst',
- 'Engineering manager',
- 'Engineer, data',
- 'Student',
- 'Data scientist or machine learning specialist',
- 'Developer, embedded applications or devices',
- 'Designer',
- 'Database administrator',
- 'System administrator',
- 'DevOps specialist',
- 'Developer, mobile',
- 'Developer, desktop or enterprise applications',
- 'Developer, front-end',
- 'Developer, back-end',
- 'Developer, full-stack']
-
+roles=['Academic researcher', 'Data or business analyst',
+       'Data scientist or machine learning specialist',
+       'Database administrator', 'DevOps specialist', 'Developer, QA or test',
+       'Developer, back-end', 'Developer, desktop or enterprise applications',
+       'Developer, embedded applications or devices', 'Developer, front-end',
+       'Developer, full-stack', 'Developer, game or graphics',
+       'Developer, mobile', 'Engineer, data', 'Scientist',
+       'System administrator']
+st.sidebar.image('./images/stackoverflow-ar21-removebg-preview.png', width=250,height=300)
 
 options = ["Job Recommandation", "Your dream Job"]
 page = st.sidebar.radio("Select a page", options)
+
 
 
 
@@ -245,10 +229,14 @@ if page=="Your dream Job":
 
                 model = JobPrediction(MLFLOW_TRACKING_URI, MLFLOW_RUN_ID, CLUSTERS_YAML_PATH)
 
-                recommandation=model.recommend_new_skills(available_skills=current_skills,target_job=target_job,threshold=0.25)
+                recommandation=model.recommend_new_skills(available_skills=current_skills,target_job=target_job,threshold=0.3)
+                recommandation = pd.Series(recommandation)
+                recommandation=recommandation.sort_values(ascending=False)
+                top_10_recommandations = recommandation[:10]
 
-                fig = px.bar(recommandation, x=recommandation.index, y=recommandation.values)
+                fig = px.bar(top_10_recommandations, x=top_10_recommandations.values, y=top_10_recommandations.index,orientation='h')
                 fig.update_layout(title='Bar chart of skills')
+
                 st.plotly_chart(fig)
 
                 
