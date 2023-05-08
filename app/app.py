@@ -26,7 +26,7 @@ roles=['Academic researcher', 'Data or business analyst',
        'Developer, full-stack', 'Developer, game or graphics',
        'Developer, mobile', 'Engineer, data', 'Scientist',
        'System administrator']
-st.sidebar.image('./images/stackoverflow-ar21-removebg-preview.png', width=250,height=300)
+st.sidebar.image('./images/stackoverflow-ar21-removebg-preview.png', width=300)
 
 options = ["Job Recommandation", "Your dream Job"]
 page = st.sidebar.radio("Select a page", options)
@@ -34,7 +34,7 @@ page = st.sidebar.radio("Select a page", options)
 
 
 
-st.title('Enter the world of tech')
+st.title('Welcome to the world of technology')
 
 if page=="Job Recommandation":
 
@@ -203,7 +203,7 @@ if page=="Your dream Job":
 
     with button_col2:
 
-            button=st.button("Check skills you should acquire for your dream Job?",key='find my match button',help="click to find your match")
+            button=st.button("Discover the skills you need to land your dream job?",key='find my match button',help="click to find your match")
 
     current_skills = [skill for group, skills in selected_skills.items() if len(skills) != 0 for skill in skills]
 
@@ -211,13 +211,12 @@ if page=="Your dream Job":
     st.markdown(
             """<style>
                 .stButton button {
-                    background-color: #1E90FF;
+                    background-color: blue;
+                    padding: 10px;
+                    border-radius: 10px;
+                    box-shadow: 1px 1px 10px grey;
                     color: white;
-                    padding: 0.7rem 1.5rem;
-                    border-radius: 0.5rem;
-                    font-size: 1.2rem;
-                    display: block;
-                    margin: 0 auto;
+                    margin:auto
                 }
             </style>""",
             unsafe_allow_html=True,
@@ -234,7 +233,7 @@ if page=="Your dream Job":
                 recommandation=recommandation.sort_values(ascending=False)
                 top_10_recommandations = recommandation[:10]
 
-                fig = px.bar(top_10_recommandations, x=top_10_recommandations.values, y=top_10_recommandations.index,orientation='h')
+                fig = px.bar(top_10_recommandations, x=top_10_recommandations.values, y=top_10_recommandations.index,orientation='h',width=800,height=800)
                 fig.update_layout(title='Bar chart of skills')
 
                 st.plotly_chart(fig)
