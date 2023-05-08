@@ -151,7 +151,7 @@ class JobPrediction:
 
         base_predictions=self.predict_jobs_probabilities(available_skills)
 
-        all_skills=pd.Series(self.get_all_skills())
+        all_skills=pd.Series(self.get_skills())
 
         new_skills=all_skills[~all_skills.isin(available_skills)].copy()
 
