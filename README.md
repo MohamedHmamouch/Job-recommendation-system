@@ -5,6 +5,8 @@ The idea for this project stemmed from reading and watching various podcasts tha
 Utilizing the Stack Overflow survey, I aim to develop a data-driven solution that can answer questions such as:
 "Do I need to learn C++ to become a Data Scientist?"
 
+If you're curious to see a demo, please visit the following link https://www.linkedin.com/posts/mohamed-hmamouch_are-you-wondering-if-you-need-to-learn-c-activity-7061980706205265922-oCgx?utm_source=share&utm_medium=member_desktop: 
+
 # Dataset :
 
 - The dataset contains responses from the Stack Overflow Annual Developer Survey.
